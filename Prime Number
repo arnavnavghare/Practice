@@ -1,0 +1,84 @@
+#include "StdAfx.h"
+#include <iostream>
+
+using namespace std;
+
+bool prime_check(int N){
+	bool prime = true;
+	if(N>2){
+		   for(int i=2; i<N; i++){
+		       if(N%i == 0){
+		           prime=false;
+			   }
+		   }
+    }
+	return prime;
+}
+
+void prime_factors(int N){
+    for (int i=2; i<=N; i++){
+        if (N%i == 0){
+            while (N%i == 0){
+                N=N/i;
+            }
+            cout<<i<<" ";
+        }
+    }
+}
+
+void prime_numbers_between(int start, int end){
+	if (start<2){
+		start=2;
+	}
+	for(start;start<end;start++){
+	    bool prime=true;
+	    for(int i=2; i<start; i++){
+	        if(start%i == 0){
+	            prime=false;
+	        }
+	    }
+	    if(prime==true){
+	        cout<<start<<" ";
+	    }
+	}
+}
+
+int main(){
+
+	int input;
+	cout<<"Enter '1' to perform prime number test and find prime factors if non-prime"<<endl<<"Enter '2' to find prime numbers between two given numbers"<<endl;
+	cin>>input;
+
+	if (input == 1){
+		int N;
+		cout<<"Enter the number = ";
+		cin>>N;
+		if(N<2){
+			cout<<"The number "<<N<<" is not defined for prime"<<endl;
+		}
+		else{
+			bool prime = prime_check(N);
+			if (prime == true){
+				cout<<"The given number "<<N<<" is prime"<<endl;
+			}
+			else{
+				cout<<"The given number "<<N<<" is not prime"<<endl<<"The prime factors are : ";
+				prime_factors(N);
+			}
+		}
+	}
+	else if(input == 2){
+		int num1,num2;
+		cout<<"Enter start value = ";
+		cin>>num1;
+		cout<<"Enter end value = ";
+		cin>>num2;
+		cout<<"The prime numbers between "<<num1<<" and "<<num2<<" are :";
+		prime_numbers_between(num1,num2);
+	}
+	else{
+		cout<<"Invalid input"<<endl;
+	}
+
+	return 0;
+}
