@@ -1,0 +1,88 @@
+#include "StdAfx.h"
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+float power(float num1, int num2) {
+float prod = num1;
+	for (int i = 1; i < num2; i++) {
+		prod = prod * num1;
+	}
+return prod;
+}
+
+int atoi_int(string str) {
+	int result = NULL;
+	for (int i = 0; i < str.length(); i++) {
+		int var = str[i] - '0';
+		if (var >= 0 && var <= 9) {
+			result = result * 10 + var;
+		}
+
+		else
+			break;
+	}
+	return result;
+}
+
+float atoi_float(string str) {
+	float result = NULL;
+	for (int i = 0; i < str.length(); i++) {
+		int var1 = str[i] - '0';
+		if (var1 >= 0 && var1 <= 9) {
+			result = result * 10 + var1;
+		}
+
+		else if (str[i] == 46) {
+			for (int j = i + 1; j < str.length(); j++) {
+				float var2 = str[j] - '0';
+				if (var2 >= 0 && var2 <= 9) {
+					result = result + power(0.1,j-i) * var2;
+				}
+				else
+				break;
+			}
+			return result;
+		}
+		else
+		break;
+	}
+	return result;
+}
+
+int main() {
+	string str;
+	cout << "Enter String = ";
+	cin >> str;
+	int var = str[0] - '0';
+	if (var >= 0 && var <= 9 || var == -2) {
+	for (int i = 0; i < str.length(); i++) {
+		int var1 = str[i] - '0';
+		if (var1 >= 0 && var1 <= 9) {
+			continue;
+		}
+		else if (str[i] == 46 && str[i+1] != 46) {
+			int var2 = str[i + 1] - '0';
+			if (var2 >= 0 && var2 <= 9) {
+				float result = atoi_float(str);
+				cout << result<<endl;
+				cout << typeid(result).name()<<endl;
+				break;
+			}
+		}
+		else {
+			break;
+		}
+		}
+		if (str[0] != '0' || str[0] != '.') {
+			int result = atoi_int(str);
+			cout << result << endl;
+			cout << typeid(result).name() << endl;
+		}
+	}
+	else {
+		cout << "Invalid";
+	}
+	return 0;
+}
