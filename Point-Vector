@@ -1,0 +1,116 @@
+#include "StdAfx.h"
+#include <iostream>
+#include<math.h>
+#define DELTA 1e-6
+
+using namespace std;
+
+class point{
+	double X,Y;
+	public:
+	friend void get_point(point);
+	friend double dist_btw_points(point, point);
+	friend void point_transform(point &o3, double dx, double dy);
+	point(double x=0, double y=0){
+		X=x;
+		Y=y;
+	}
+};
+
+void get_point(point o){
+	cout<<"("<<o.X<<","<<o.Y<<")"<<endl;
+}
+
+double dist_btw_points(point o1, point o2){
+	double dx = o2.X-o1.X;
+	double dy = o2.Y-o1.Y;
+	double D = pow((pow(dx,2))+(pow(dy,2)),0.5);
+	return D;
+}
+
+void point_transform(point &o3, double dx, double dy){
+	o3.X+=dx;
+	o3.Y+=dy;
+}
+
+void point_overlap(point o1, point o2){
+	if (dist_btw_points(o1, o2)<DELTA){
+		cout<<"The given points overlaps"<<endl;
+	}
+	else {
+	cout<<"The given points does not overlap"<<endl;
+	}
+}
+
+class vector{
+	double X, Y, Z;
+public:
+	friend void get_vector(vector);
+	friend vector add_vector(vector , vector);
+	friend vector sub_vector(vector , vector);
+	friend vector scale_vector(vector &v, double);
+	friend double vector_magnitude(vector v);
+	vector(double x=0, double y=0, double z=0){
+		X=x;
+		Y=y;
+		Z=z;
+	}
+};
+
+void get_vector(vector v){
+	if (v.X>0 && v.Y>0 && v.Z>0){
+		cout<<v.X<<"i+"<<v.Y<<"j+"<<v.Z<<"k"<<endl;
+	}
+	else if (v.X>0 && v.Y>0 && v.Z<0){
+			cout<<v.X<<"i+"<<v.Y<<"j"<<v.Z<<"k"<<endl;
+	}
+	else if (v.X>0 && v.Y<0 && v.Z>0){
+			cout<<v.X<<"i"<<v.Y<<"j+"<<v.Z<<"k"<<endl;
+	}
+	else if (v.X>0 && v.Y<0 && v.Z<0){
+			cout<<v.X<<"i"<<v.Y<<"j"<<v.Z<<"k"<<endl;
+	}
+	else if (v.X<0 && v.Y>0 && v.Z>0){
+			cout<<v.X<<"i+"<<v.Y<<"j+"<<v.Z<<"k"<<endl;
+	}
+	else if (v.X<0 && v.Y>0 && v.Z<0){
+			cout<<v.X<<"i+"<<v.Y<<"j"<<v.Z<<"k"<<endl;
+	}
+	else if (v.X<0 && v.Y<0 && v.Z>0){
+			cout<<v.X<<"i"<<v.Y<<"j+"<<v.Z<<"k"<<endl;
+	}
+	else if (v.X<0 && v.Y<0 && v.Z<0){
+		cout<<v.X<<"i"<<v.Y<<"j"<<v.Z<<"k"<<endl;
+	}
+	else {
+		cout<<v.X<<"i+"<<v.Y<<"j+"<<v.Z<<"k"<<endl;
+	}
+}
+
+vector add_vector(vector v1, vector v2){
+	vector v3((v1.X+v2.X),(v1.Y+v2.Y),(v1.Z+v2.Z));
+	return v3;
+}
+
+vector sub_vector(vector v1, vector v2){
+	vector v3((v1.X-v2.X),(v1.Y-v2.Y),(v1.Z-v2.Z));
+	return v3;
+}
+
+vector scale_vector(vector &v, double SF){
+	v.X=v.X*SF;
+	v.Y=v.Y*SF;
+	v.Z=v.Z*SF;
+	return v;
+}
+
+double vector_magnitude(vector v){
+	double m = pow(pow(v.X,2)+pow(v.Y,2)+pow(v.Z,2),0.5);
+	return m;
+}    
+
+int main(){
+	vector a(-1,-2,1);
+	get_vector(a);
+	return 0;
+}
