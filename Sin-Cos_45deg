@@ -1,0 +1,90 @@
+#include "StdAfx.h"
+#include <iostream>
+
+using namespace std;
+
+float deg_rad(float deg){
+    float rad = (deg*(22.0/(7.0*180.0)));
+    return rad;
+}
+
+int factorial(int num){
+    int prod = 1;
+    for (int i=num; i>1;i--){
+        prod=prod*i;
+    }
+return prod;
+}
+
+float power(float num1, int num2){
+    float prod=num1;
+    for (int i=1; i<num2; i++){
+        prod=prod*num1;
+    }
+    return prod;
+}
+
+float absolute(float num){
+    if(num<0){
+        num=-num;
+    }
+    return num;
+}
+
+float sine(int,int);
+float cosine(int,int);
+
+float sine(int angle, int N=4){
+	int main_angle = angle%180;
+	if (main_angle>90){
+		main_angle=180-main_angle;
+	}
+	float sine_val=0;
+	if (main_angle<45){
+		float exp=deg_rad(main_angle), j=2, i=1;
+			while(absolute(exp)>(1.0/power(10,N))){
+				i=i+2;
+				j++;
+				sine_val=sine_val+exp;
+				exp = power(-1,j)*(power((deg_rad(main_angle)),i)/factorial(i));
+			}
+	}
+	else {
+		sine_val=cosine((90-main_angle),N);
+	}
+	if (angle%360>180){
+		sine_val=-(sine_val);
+	}
+	return sine_val;
+}
+
+float cosine(int angle, int N=4){
+	int main_angle = angle%180;
+	if (main_angle>90){
+		main_angle=180-main_angle;
+	}
+	float cosine_val=0;
+	if (main_angle<45){
+		float exp=1, j=2, i=0;
+			while(absolute(exp)>(1.0/power(10,N))){
+				i=i+2;
+				j++;
+				cosine_val=cosine_val+exp;
+				exp = power(-1,j)*(power((deg_rad(main_angle)),i)/factorial(i));
+			}
+	}
+	else{
+		cosine_val=sine((90-main_angle),N);
+	}
+	int var1 = angle%360;
+	if (90<var1 & var1<270){
+		cosine_val=-(cosine_val);
+	}
+	return cosine_val;
+}
+
+int main(){
+	cout<<sine(30,4)<<endl;;
+	cout<<cosine(30,4)<<endl;
+    return 0;
+}
