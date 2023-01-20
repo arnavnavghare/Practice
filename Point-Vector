@@ -5,20 +5,26 @@
 
 using namespace std;
 
+class vector;
+
 class point{
-	double X,Y;
+	double X,Y,Z;
 	public:
 	friend void get_point(point);
 	friend double dist_btw_points(point, point);
-	friend void point_transform(point &o3, double dx, double dy);
-	point(double x=0, double y=0){
+	friend void point_transform(point &o3, double dx, double dy, double dz = 0);
+	friend vector position_vector(point);
+	point(double x=0, double y=0, double z=0){
 		X=x;
 		Y=y;
+		Z=z;
 	}
+	~point(){
+	};
 };
 
 void get_point(point o){
-	cout<<"("<<o.X<<","<<o.Y<<")"<<endl;
+	cout<<"("<<o.X<<","<<o.Y<<","<<o.Z<<")"<<endl;
 }
 
 double dist_btw_points(point o1, point o2){
@@ -28,9 +34,10 @@ double dist_btw_points(point o1, point o2){
 	return D;
 }
 
-void point_transform(point &o3, double dx, double dy){
+void point_transform(point &o3, double dx, double dy, double dz){
 	o3.X+=dx;
 	o3.Y+=dy;
+	o3.Z+=dz;
 }
 
 void point_overlap(point o1, point o2){
@@ -50,40 +57,42 @@ public:
 	friend vector sub_vector(vector , vector);
 	friend vector scale_vector(vector &v, double);
 	friend double vector_magnitude(vector v);
+	friend vector reverse_vector(vector &vec);
+	friend int vector_dot_product(vector vec1, vector vec2);
+	friend vector vector_cross_product(vector vec1, vector vec2);
 	vector(double x=0, double y=0, double z=0){
 		X=x;
 		Y=y;
 		Z=z;
 	}
+	~vector(){
+	}
 };
 
 void get_vector(vector v){
-	if (v.X>0 && v.Y>0 && v.Z>0){
+	if (v.X>=0 && v.Y>=0 && v.Z>=0){
 		cout<<v.X<<"i+"<<v.Y<<"j+"<<v.Z<<"k"<<endl;
 	}
-	else if (v.X>0 && v.Y>0 && v.Z<0){
+	else if (v.X>=0 && v.Y>=0 && v.Z<=0){
 			cout<<v.X<<"i+"<<v.Y<<"j"<<v.Z<<"k"<<endl;
 	}
-	else if (v.X>0 && v.Y<0 && v.Z>0){
+	else if (v.X>=0 && v.Y<=0 && v.Z>=0){
 			cout<<v.X<<"i"<<v.Y<<"j+"<<v.Z<<"k"<<endl;
 	}
-	else if (v.X>0 && v.Y<0 && v.Z<0){
+	else if (v.X>=0 && v.Y<=0 && v.Z<=0){
 			cout<<v.X<<"i"<<v.Y<<"j"<<v.Z<<"k"<<endl;
 	}
-	else if (v.X<0 && v.Y>0 && v.Z>0){
+	else if (v.X<=0 && v.Y>=0 && v.Z>=0){
 			cout<<v.X<<"i+"<<v.Y<<"j+"<<v.Z<<"k"<<endl;
 	}
-	else if (v.X<0 && v.Y>0 && v.Z<0){
+	else if (v.X<=0 && v.Y>=0 && v.Z<=0){
 			cout<<v.X<<"i+"<<v.Y<<"j"<<v.Z<<"k"<<endl;
 	}
-	else if (v.X<0 && v.Y<0 && v.Z>0){
+	else if (v.X<=0 && v.Y<=0 && v.Z>=0){
 			cout<<v.X<<"i"<<v.Y<<"j+"<<v.Z<<"k"<<endl;
 	}
-	else if (v.X<0 && v.Y<0 && v.Z<0){
+	else{
 		cout<<v.X<<"i"<<v.Y<<"j"<<v.Z<<"k"<<endl;
-	}
-	else {
-		cout<<v.X<<"i+"<<v.Y<<"j+"<<v.Z<<"k"<<endl;
 	}
 }
 
@@ -107,10 +116,49 @@ vector scale_vector(vector &v, double SF){
 double vector_magnitude(vector v){
 	double m = pow(pow(v.X,2)+pow(v.Y,2)+pow(v.Z,2),0.5);
 	return m;
-}    
+}
+
+vector position_vector(point o){
+	vector vec(o.X,o.Y,o.Z);
+	return vec;
+}
+
+vector vector_using_points(point o1, point o2){
+	vector vec1=position_vector(o1);
+	vector vec2=position_vector(o2);
+	vector vec;
+	if (vector_magnitude(vec1)>vector_magnitude(vec2)){
+		vec = sub_vector(vec1,vec2);
+	}
+	else{
+		vec = sub_vector(vec2,vec1);
+	}
+	return vec;
+}
+
+vector reverse_vector(vector &vec){
+	vec.X=-vec.X;
+	vec.Y=-vec.Y;
+	vec.Z=-vec.Z;
+	return vec;
+}
+
+int vector_dot_product(vector vec1, vector vec2){
+	int dot_product;
+	dot_product=vec1.X*vec2.X+vec1.Y*vec2.Y+vec1.Z*vec2.Z;
+	return dot_product;
+}
+
+vector vector_cross_product(vector vec1, vector vec2){
+	vector vec;
+	vec.X = vec1.Y*vec2.Z-vec1.Z*vec2.Y;
+	vec.Y = vec1.Z*vec2.X-vec1.X*vec2.Z;
+	vec.Z = vec1.X*vec2.Y-vec1.Y*vec2.X;
+	return vec;
+}
 
 int main(){
-	vector a(-1,-2,1);
-	get_vector(a);
+	vector vec1(0,0,0), vec2(0,0,0);
+	get_vector(vector_cross_product(vec1,vec2));
 	return 0;
-}
+} 
