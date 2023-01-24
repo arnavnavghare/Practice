@@ -1,0 +1,64 @@
+#include "stdafx.h"
+#include <iostream>
+
+using namespace std;
+
+class complex{
+	float real;
+	float im;
+public:
+	complex(float R=0, float I=0){
+		real=R;
+		im=I;
+	}
+
+	friend ostream & operator << (ostream &out,complex c);
+	friend istream & operator >> (istream &cin, complex &c);
+
+	complex operator + (complex c){
+		complex temp;
+		temp.real=real+c.real;
+		temp.im=im+c.im;
+		return temp;
+	}
+
+	complex operator-  (complex c){
+		complex temp;
+		temp.real=real-c.real;
+		temp.im=im-c.im;
+		return temp;
+	}
+	
+	~complex(){};
+};
+
+	ostream & operator << (ostream &cout, complex c)
+	{
+		if (c.im <= 0){
+			cout << c.real << c.im << "i";
+		}
+		else {
+			cout << c.real <<"+" << c.im << "i";
+		}
+		return cout;
+	}
+
+	istream & operator >> (istream &cin, complex &c){
+		cout<<"Enter real part : ";
+		cin>>c.real;
+		cout<<"Enter imaginary part : ";
+		cin>>c.im;
+		return cin;
+	}
+
+
+int main(){
+	complex o1,o2;
+	cin>>o1;
+	cin>>o2;
+	complex o3=o1+o2;
+	complex o4=o1-o2;
+	cout<<o3<<endl;
+	cout<<o4<<endl;
+	return 0;
+}
