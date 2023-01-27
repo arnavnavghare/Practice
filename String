@@ -1,0 +1,31 @@
+#include "StdAfx.h"
+#include <iostream>
+#define SIZE 100
+using namespace std;
+
+class String{
+private:
+	char m_str[SIZE];
+public:
+	void SetData(){
+		cin.getline(m_str, SIZE);
+	}
+	void GetData(){
+		cout<<m_str;
+	}
+	int StringLength(){
+		int count = 0;
+		for (int i=0; m_str[i]!='\0'; i++){
+			count=i;
+		}
+		return count;
+	}
+};
+
+int main(){
+	String str;
+	str.SetData();
+	cout<<str.StringLength()<<endl;
+	cout<<typeid(str.StringLength()).name()<<endl;
+	return 0;
+}
