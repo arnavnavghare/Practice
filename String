@@ -1,31 +1,79 @@
-#include "StdAfx.h"
 #include <iostream>
-#define SIZE 100
 using namespace std;
-
+#define SIZE 1000
 class String{
 private:
 	char m_str[SIZE];
+
 public:
-	void SetData(){
-		cin.getline(m_str, SIZE);
-	}
-	void GetData(){
-		cout<<m_str;
-	}
-	int StringLength(){
-		int count = 0;
-		for (int i=0; m_str[i]!='\0'; i++){
-			count=i;
+	inline String() {
+	};
+
+	friend istream& operator >> (istream& in, String &st);
+	friend ostream& operator<< (ostream& out, String str);
+
+	int StrLen() {
+		int i;
+		for (i = 0; m_str[i] != '\0'; i++) {
 		}
-		return count;
+		return i;
 	}
+
+	void Rev() {
+		int i;
+		for (i = 0; m_str[i] != '\0'; i++) {
+		}
+		char RevStr[SIZE];
+		for(int j=i-1; j>=0; j--){
+			RevStr[(i - 1) - j] = m_str[j];
+		}
+		RevStr[i] = '\0';
+		cout << RevStr;
+	}
+
+	void concatenate(String& str1) {
+		int i = 0, j = 0;
+		for (i = StrLen(); i < (StrLen() + str1.StrLen() - 1); i++) {
+			m_str[i] = str1.m_str[j];
+			j++;
+		}
+		m_str[i] = '\0';
+		cout << m_str << endl;
+	}
+	
+	void ToUpperCase() {
+		for (int i = 0; i < StrLen(); i++) {
+			if (m_str[i] >= 'a' && m_str[i] <= 'z') {
+				m_str[i]= m_str[i] - 32;
+			}
+		}
+		cout << m_str;
+	}
+	void ToLowerCase() {
+		for (int i = 0; i < StrLen(); i++) {
+			if (m_str[i] >= 'A' && m_str[i] <= 'Z') {
+				m_str[i] = m_str[i] + 32;
+			}
+		}
+		cout << m_str;
+	}
+
+	~String() {};
 };
 
-int main(){
+istream& operator >> (istream& in, String &st) {
+	in.getline(st.m_str, st.StrLen());
+	return in;
+}
+
+ostream& operator << (ostream& out, String str) {
+	out << str.m_str;
+	return out;
+}
+
+int main() {
 	String str;
-	str.SetData();
-	cout<<str.StringLength()<<endl;
-	cout<<typeid(str.StringLength()).name()<<endl;
+	cin >> str;
+	str.ToUpperCase();
 	return 0;
 }
