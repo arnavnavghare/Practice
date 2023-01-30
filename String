@@ -1,16 +1,16 @@
+#include "StdAfx.h"
 #include <iostream>
 using namespace std;
 #define SIZE 1000
+
 class String{
 private:
 	char m_str[SIZE];
-
 public:
-	inline String() {
+	String(){
 	};
-
-	friend istream& operator >> (istream& in, String &st);
-	friend ostream& operator<< (ostream& out, String str);
+	friend istream &operator >> (istream &in, String &str);
+	friend ostream &operator << (ostream &out, String str);
 
 	int StrLen() {
 		int i;
@@ -18,8 +18,8 @@ public:
 		}
 		return i;
 	}
-
-	void Rev() {
+/*
+	char* Rev() {
 		int i;
 		for (i = 0; m_str[i] != '\0'; i++) {
 		}
@@ -28,7 +28,20 @@ public:
 			RevStr[(i - 1) - j] = m_str[j];
 		}
 		RevStr[i] = '\0';
-		cout << RevStr;
+		return RevStr;
+	}
+*/
+	String Rev() {
+		int i;
+		for (i = 0; m_str[i] != '\0'; i++) {
+		}
+		String s;
+		s.m_str[SIZE];
+		for(int j=i-1; j>=0; j--){
+			s.m_str[(i - 1) - j] = m_str[j];
+		}
+		s.m_str[i] = '\0';
+		return s;
 	}
 
 	void concatenate(String& str1) {
@@ -59,21 +72,23 @@ public:
 	}
 
 	~String() {};
+
 };
 
-istream& operator >> (istream& in, String &st) {
-	in.getline(st.m_str, st.StrLen());
+istream &operator >> (istream &in, String &str){
+	cin.getline(str.m_str, SIZE);
 	return in;
 }
 
-ostream& operator << (ostream& out, String str) {
+ostream &operator << (ostream &out, String str){
 	out << str.m_str;
 	return out;
 }
 
 int main() {
-	String str;
-	cin >> str;
-	str.ToUpperCase();
+	String st1,st2;
+	cin>>st1;
+	cin>>st2;
+	st1.concatenate(st2);
 	return 0;
 }
