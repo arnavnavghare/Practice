@@ -71,6 +71,20 @@ public:
 		cout << m_str;
 	}
 
+	int find(String st){
+		int i,j=0;
+		for (i=0;i<StrLen();i++){
+			int k=i;
+			while (m_str[k] == st.m_str[j]){
+				if (i+st.StrLen()-1==k){
+					return i;
+				}
+				k++,j++;
+			}
+			j=0;
+		}
+	}
+
 	~String() {};
 
 };
@@ -89,6 +103,6 @@ int main() {
 	String st1,st2;
 	cin>>st1;
 	cin>>st2;
-	st1.concatenate(st2);
+	cout<<st1.find(st2);
 	return 0;
 }
