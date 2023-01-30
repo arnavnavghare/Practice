@@ -1,45 +1,76 @@
-#include "stdafx.h"
 #include <iostream>
-
+#include <vector>
+#include <fstream>
+#include <string>
 using namespace std;
 
-class Student{
+class Student {
 private:
 	string m_name, m_rollnumber, m_grade;
-	int m_mathmarks, m_mciencemarks, m_socialsciencemarks;
+	int m_index, m_mathmarks, m_sciencemarks, m_socialsciencemarks;
 public:
-	Student(){
+	inline Student() {
 	};
-	float Percentage(){
-		float per;
-		per = ((m_mathmarks+m_mciencemarks+m_socialsciencemarks)/3)*100;
-		return per;
+
+
+	void SetData() {
+		ofstream out("Output.txt");
+		cout << "Enter Name : ";
+		getline(cin, m_name);
+		out << m_name << ",";
+
+		cout << "Enter Roll NUmber : ";
+		getline(cin, m_rollnumber);
+		out << m_rollnumber << ",";
+
+		cout << "Enter Math Marks : ";
+		getline(cin, m_mathmarks);
+		cout << "Enter Science Marks : ";
+		cin >> m_sciencemarks;
+		cout << "Enter Social Science Marks : ";
+		cin >> m_socialsciencemarks;
 	}
 
-	char* Grade(){
-		string grade;
-		if (Percentage()>=95){
-			grade = "A+";
-		}
-		else if (Percentage()>=90){
-			grade = "A";
-		}
-		else if (Percentage()>=80){
-			grade = "B+";
-		}
-		else if (Percentage()>=70){
-			grade = "B";
-		}
-		else if (Percentage()>=65){
-			grade = "C+";
-		}
-		else if (Percentage()>=60){
-			grade = "C";
-		}
+	void GetData() {
 
+	}
+
+	float Percentage() {
+		float percent;
+		percent = ((m_mathmarks + m_sciencemarks + m_socialsciencemarks) / 3) * 100;
+		return percent;
+	}
+
+	string Grade() {
+		if (Percentage() > 90) {
+			m_grade = "A+";
+		}
+		else if (Percentage() > 80 && Percentage() <= 90) {
+			m_grade = "A";
+		}
+		else if (Percentage() > 70 && Percentage() <= 80) {
+			m_grade = "B+";
+		}
+		else if (Percentage() > 60 && Percentage() <= 70) {
+			m_grade = "B";
+		}
+		else if (Percentage() > 50 && Percentage() <= 60) {
+			m_grade = "C+";
+		}
+		else if (Percentage() > 40 && Percentage() <= 50) {
+			m_grade = "C";
+		}
+		else {
+			m_grade = "D";
+		}
+		return m_grade;
+	}
 };
 
-int main()
-{
+	int main()
+	{
+		Student std1;
+		std1.SetData();
 
-}  
+		return 0;
+	}
