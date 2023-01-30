@@ -1,0 +1,45 @@
+#include "stdafx.h"
+#include <iostream>
+
+using namespace std;
+
+class Student{
+private:
+	string m_name, m_rollnumber, m_grade;
+	int m_mathmarks, m_mciencemarks, m_socialsciencemarks;
+public:
+	Student(){
+	};
+	float Percentage(){
+		float per;
+		per = ((m_mathmarks+m_mciencemarks+m_socialsciencemarks)/3)*100;
+		return per;
+	}
+
+	char* Grade(){
+		string grade;
+		if (Percentage()>=95){
+			grade = "A+";
+		}
+		else if (Percentage()>=90){
+			grade = "A";
+		}
+		else if (Percentage()>=80){
+			grade = "B+";
+		}
+		else if (Percentage()>=70){
+			grade = "B";
+		}
+		else if (Percentage()>=65){
+			grade = "C+";
+		}
+		else if (Percentage()>=60){
+			grade = "C";
+		}
+
+};
+
+int main()
+{
+
+}  
