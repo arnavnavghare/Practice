@@ -1,0 +1,15 @@
+#include "StdAfx.h"
+#include <iostream>
+using namespace std;
+
+class Set{
+private:
+
+public:
+	static int a;
+};
+
+int main() {
+	cout<<sizeof(Set::a);
+	return 0;
+}
