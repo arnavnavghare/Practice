@@ -5,7 +5,7 @@
 #include <string>
 using namespace std;
 
-ofstream out("Output.txt");
+ofstream out("Data.txt");
 
 class Student {
 private:
@@ -19,31 +19,38 @@ public:
 
 		cout << "Enter Name : ";
 		getline(cin, m_name);
-		out << m_name << "          ";
+		out << m_name << ",";
 
 		cout << "Enter Roll NUmber : ";
 		getline(cin, m_rollnumber);
-		out << m_rollnumber << "          ";
+		out << m_rollnumber << ",";
 
 		cout << "Enter Math Marks : ";
 		cin >> m_mathmarks;
-		out << m_mathmarks << "          ";
+		out << m_mathmarks << ",";
 
 		cout << "Enter Science Marks : ";
 		cin >> m_sciencemarks;
-		out << m_sciencemarks << "          ";
+		out << m_sciencemarks << ",";
 
 		cout << "Enter Social Science Marks : ";
 		cin >> m_socialsciencemarks;
 		cin.ignore(1,'\n');
-		out << m_socialsciencemarks  << "          ";
+		out << m_socialsciencemarks  << ",";
 
 		out << Grade();
 		out << endl;
 	}
 
 	void GetData() {
-
+		ifstream in;
+		in.open("Data.txt");
+		int index = 0;
+		string line;
+		while(getline(in,line)){
+			index++;
+			cout << index << "." << line <<endl;
+		}
 	}
 
 	float Percentage() {
@@ -85,20 +92,12 @@ public:
 		Student std;
 		std.SetData();
 		*/	
-		Student std1,std2,std3;
+		Student std1,std2,std3,out;
 		std1.SetData();
 		std2.SetData();
 		std3.SetData();
-		
-		string line;
-		ifstream fin;
-		fin.open("Output.txt");
-		int i=0;
-		while (getline(fin, line)) {
-			i++;
-			cout << i << ". " << line << endl;
-		}
-		fin.close();
-		
+
+		out.GetData();
+	
 		return 0;
 	}
