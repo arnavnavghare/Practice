@@ -5,7 +5,8 @@
 #include <string>
 using namespace std;
 
-ofstream out("Data.txt");
+fstream out("Data.txt", ios::out | ios::app);
+fstream in("Data.txt", ios::in);
 
 class Student {
 private:
@@ -43,8 +44,6 @@ public:
 	}
 
 	void GetData() {
-		ifstream in;
-		in.open("Data.txt");
 		int index = 0;
 		string line;
 		while(getline(in,line)){
