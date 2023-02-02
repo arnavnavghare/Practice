@@ -1,0 +1,57 @@
+#include "StdAfx.h"
+#include <iostream>
+using namespace std;
+
+// #pragma pack(1)
+
+class intch{ // 5
+	int m_int; // 4
+	char m_ch; // 1
+};
+
+class intdb{ // 12
+	int m_int; // 4
+	double m_db; // 8
+};
+
+class intsh{ // 6
+	int m_int; // 4
+	short m_sh; // 2
+};
+
+class int2ch{ // 9
+	int m_int1,m_int2; // 8
+	char m_ch; // 1
+};
+
+class int5ch{ // 21
+	int m_int1,m_int2,m_int3,m_int4,m_int5; // 20
+	char m_ch; // 1
+};
+
+class intch5{  // 9
+	int m_int; // 4
+	char m_ch1,m_ch2,m_ch3,m_ch4,m_ch5; // 5
+};
+
+class int5ch5{ // 25
+	int m_int1,m_int2,m_int3,m_int4,m_int5; // 20
+	char m_ch1,m_ch2,m_ch3,m_ch4,m_ch5; // 5
+};
+
+class dbsh5{ // 18
+	double m_db; // 8
+	short m_sh1,m_sh2,m_sh3,m_sh4,m_sh5; // 10
+};
+
+int main() {
+	cout<< "The size of (1 int & 1 ch) is "<<sizeof(intch)<<endl;
+	cout<< "The size of (1 int & 1 db) is "<<sizeof(intdb)<<endl;
+	cout<< "The size of (1 int & 1 sh) is "<<sizeof(intsh)<<endl;
+	cout<< "The size of (2 int & 1 ch) is "<<sizeof(int2ch)<<endl;
+	cout<< "The size of (5 int & 1 ch) is "<<sizeof(int5ch)<<endl;
+	cout<< "The size of (1 int & 5 ch) is "<<sizeof(intch5)<<endl;
+	cout<< "The size of (5 int & 5 ch) is "<<sizeof(int5ch5)<<endl;
+	cout<< "The size of (1 db & 5 sh) is "<<sizeof(dbsh5)<<endl;
+	return 0;
+}
