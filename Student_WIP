@@ -1,20 +1,21 @@
+#include "StdAfx.h"
 #include <iostream>
 #include <vector>
 #include <fstream>
 #include <string>
 using namespace std;
 
+ofstream out("Output.txt");
+
 class Student {
 private:
 	string m_name, m_rollnumber, m_grade;
 	int m_index, m_mathmarks, m_sciencemarks, m_socialsciencemarks;
 public:
-	inline Student() {
+	Student() {
 	};
 
-
 	void SetData() {
-		ofstream out("Output.txt");
 		cout << "Enter Name : ";
 		getline(cin, m_name);
 		out << m_name << ",";
@@ -24,11 +25,21 @@ public:
 		out << m_rollnumber << ",";
 
 		cout << "Enter Math Marks : ";
-		getline(cin, m_mathmarks);
+		cin >> m_mathmarks;
+		out << m_mathmarks << ",";
+
 		cout << "Enter Science Marks : ";
 		cin >> m_sciencemarks;
+		out << m_sciencemarks << ",";
+
 		cout << "Enter Social Science Marks : ";
 		cin >> m_socialsciencemarks;
+		cin.ignore(1,'\n');
+		out << m_socialsciencemarks  << ",";
+
+		out << Grade();
+		
+		out << endl;
 	}
 
 	void GetData() {
@@ -37,7 +48,7 @@ public:
 
 	float Percentage() {
 		float percent;
-		percent = ((m_mathmarks + m_sciencemarks + m_socialsciencemarks) / 3) * 100;
+		percent = ((m_mathmarks + m_sciencemarks + m_socialsciencemarks) / 3);
 		return percent;
 	}
 
@@ -69,8 +80,14 @@ public:
 
 	int main()
 	{
-		Student std1;
+		/*
+		TO MAKE AN ENTRY ------------------------>
+		Student std;
+		std.SetData();
+		*/
+		Student std1,std2,std3;
 		std1.SetData();
-
+		std2.SetData();
+		std3.SetData();
 		return 0;
 	}
