@@ -90,13 +90,12 @@ public:
 		TO MAKE AN ENTRY ------------------------>
 		Student std;
 		std.SetData();
-		*/	
-		Student std1,std2,std3,out;
-		std1.SetData();
-		std2.SetData();
-		std3.SetData();
-
-		out.GetData();
+		*/
+		Student print;
+		out.seekg(2);
+		cout<<out.tellg()<<endl;
+		out<<"Oops!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!";
+		print.GetData();
 	
 		return 0;
 	}
