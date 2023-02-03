@@ -39,8 +39,7 @@ public:
 		cin.ignore(1,'\n');
 		out << m_socialsciencemarks  << ",";
 
-		out << Grade();
-		out << endl;
+		out << Grade()  << ",";
 	}
 
 	void GetData() {
@@ -91,11 +90,43 @@ public:
 		Student std;
 		std.SetData();
 		*/
-		Student print;
-		out.seekg(2);
-		cout<<out.tellg()<<endl;
-		out<<"Oops!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!";
-		print.GetData();
-	
+		
+		/*
+		TO CALL ALL ENTRIES ------------------------>
+		string line;
+		int index=1;
+		int LineNumber = 4;
+		while(getline(in,line,',')){
+			cout<<'\t'<<line;
+			if (index%6 == 0){
+				cout<<endl;
+			}
+			index++;
+		}
+		*/
+
+		/*
+		TO CALL SINGLE ELEMENT ------------------------>
+		string line;
+		int Index=0;
+		int Row = 3;
+		int column = 1;
+		int Block = ((Row-1)*6)+column ;
+
+		while(getline(in,line,',')){
+			Index++;
+			if(Index == Block){
+				cout<<line<<endl;
+			}
+		}
+		*/
+
+		/*
+		Student A,B,C;
+		A.SetData();
+		B.SetData();
+		C.SetData();
+		*/
+
 		return 0;
 	}
