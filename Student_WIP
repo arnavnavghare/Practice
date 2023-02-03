@@ -95,7 +95,6 @@ public:
 		TO CALL ALL ENTRIES ------------------------>
 		string line;
 		int index=0;
-		int LineNumber = 4;
 		while(getline(in,line,',')){
 			if (index%6 == 0){
 				cout<<(index/6+1)<<". ";
