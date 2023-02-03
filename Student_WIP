@@ -1,4 +1,3 @@
-#include "StdAfx.h"
 #include <iostream>
 #include <vector>
 #include <fstream>
@@ -36,18 +35,18 @@ public:
 
 		cout << "Enter Social Science Marks : ";
 		cin >> m_socialsciencemarks;
-		cin.ignore(1,'\n');
-		out << m_socialsciencemarks  << ",";
+		cin.ignore(1, '\n');
+		out << m_socialsciencemarks << ",";
 
-		out << Grade()  << ",";
+		out << Grade() << ",";
 	}
 
 	void GetData() {
 		int index = 0;
 		string line;
-		while(getline(in,line)){
+		while (getline(in, line)) {
 			index++;
-			cout << index << "." << line <<endl;
+			cout << index << "." << line << endl;
 		}
 	}
 
@@ -83,52 +82,72 @@ public:
 	}
 };
 
-	int main()
-	{
-		/*
-		TO MAKE AN ENTRY ------------------------>
-		Student std;
-		std.SetData();
-		*/
-		
-		/*
-		TO CALL ALL ENTRIES ------------------------>
-		string line;
-		int index=0;
-		while(getline(in,line,',')){
-			if (index%6 == 0){
-				cout<<(index/6+1)<<". ";
-			}
-			index++;
-			cout<<'\t'<<line;
-			if (index%6 == 0){
-				cout<<endl;
-			}
+int main()
+{
+	/*
+	TO MAKE AN ENTRY ------------------------>
+	Student std;
+	std.SetData();
+	*/
+
+	/*
+	TO CALL ALL ENTRIES ------------------------>
+	string line;
+	int index=0;
+	while(getline(in,line,',')){
+		if (index%6 == 0){
+			cout<<(index/6+1)<<". ";
 		}
-		*/
-
-		/*
-		TO CALL SINGLE ELEMENT ------------------------>
-		string line;
-		int Index=0;
-		int Row = 3;
-		int column = 1;
-		int Block = ((Row-1)*6)+column ;
-
-		while(getline(in,line,',')){
-			Index++;
-			if(Index == Block){
-				cout<<line<<endl;
-			}
+		index++;
+		cout<<'\t'<<line;
+		if (index%6 == 0){
+			cout<<endl;
 		}
-		*/
-
-		/*
-		Student A,B,C;
-		A.SetData();
-		B.SetData();
-		C.SetData();
-		*/
-
-		return 0;
 	}
+	*/
+
+	/*
+	TO CALL SINGLE ELEMENT ------------------------>
+	string line;
+	int Index=0;
+	int Row = 3;
+	int column = 1;
+	int Block = ((Row-1)*6)+column ;
+
+	while(getline(in,line,',')){
+		Index++;
+		if(Index == Block){
+			cout<<line<<endl;
+		}
+	}
+	*/
+
+	/*
+	TO GET INDEX------------------------>
+	string CSV;
+	int Row = 2;
+	int column = 1;
+	int Block = ((Row-1)*6)+column ;
+	int CommaCnt = 0;
+	int cnt=0;
+	getline(in, CSV);
+	for (int i = 0; i < CSV.length(); i++) {
+		if (CSV[i] == ',') {
+			cnt++;
+			if (cnt == Block-1) {
+				return i;
+			}
+		}
+	}
+	*/
+
+	/*
+	Student A,B,C;
+	A.SetData();
+	B.SetData();
+	C.SetData();
+	*/
+
+	
+	return 0;
+}
