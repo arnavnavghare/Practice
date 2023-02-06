@@ -1,0 +1,207 @@
+#include "StdAfx.h"
+#include <iostream>
+#include <vector>
+#include <fstream>
+#include <string>
+
+using namespace std;
+
+fstream out("Data.txt", ios::out | ios::app);
+fstream outtemp("temp.txt", ios::out | ios::trunc);
+fstream in("Data.txt", ios::in);
+
+class Student {
+private:
+	string m_name, m_rollnumber, m_grade;
+	int m_index, m_mathmarks, m_sciencemarks, m_socialsciencemarks;
+public:
+	Student() {
+
+	};
+
+	void SetData() {
+
+		cout << "Enter Name : ";
+		getline(cin, m_name);
+		out << m_name << ",";
+
+		cout << "Enter Roll NUmber : ";
+		getline(cin, m_rollnumber);
+		out << m_rollnumber << ",";
+
+		cout << "Enter Math Marks : ";
+		cin >> m_mathmarks;
+		out << m_mathmarks << ",";
+
+		cout << "Enter Science Marks : ";
+		cin >> m_sciencemarks;
+		out << m_sciencemarks << ",";
+
+		cout << "Enter Social Science Marks : ";
+		cin >> m_socialsciencemarks;
+		cin.ignore(1, '\n');
+		out << m_socialsciencemarks << ",";
+
+		out << Grade() << ",";
+		out << '\n';
+	}
+
+	void GetData() {
+		int index = 0;
+		string line;
+		while (getline(in, line)) {
+			index++;
+			cout << index << "." << line << endl;
+		}
+	}
+
+	float Percentage() {
+		float percent;
+		percent = ((m_mathmarks + m_sciencemarks + m_socialsciencemarks) / 3);
+		return percent;
+	}
+
+	string Grade() {
+		if (Percentage() > 90) {
+			m_grade = "A+";
+		}
+		else if (Percentage() > 80 && Percentage() <= 90) {
+			m_grade = "A";
+		}
+		else if (Percentage() > 70 && Percentage() <= 80) {
+			m_grade = "B+";
+		}
+		else if (Percentage() > 60 && Percentage() <= 70) {
+			m_grade = "B";
+		}
+		else if (Percentage() > 50 && Percentage() <= 60) {
+			m_grade = "C+";
+		}
+		else if (Percentage() > 40 && Percentage() <= 50) {
+			m_grade = "C";
+		}
+		else {
+			m_grade = "D";
+		}
+		return m_grade;
+	}
+};
+
+/*
+TO CALL SINGLE ELEMENT ------------------------>
+*/
+string Element(int row, int col, string Line){
+	string line = Line;
+	int Index=0;
+	int Row = row;
+	int column = col;
+	int Block = ((Row-1)*6)+column ;
+
+	while(getline(in,line,',')){
+		Index++;
+		if(Index == Block){
+			for (int i=0; i<line.length(); i++){
+				if (line[i] == '\n'){
+					line.erase(line.begin()+i);
+				}
+			}
+			return line;
+		}
+	}
+}
+
+int main()
+{
+	/*
+	TO MAKE AN ENTRY ------------------------>
+	Student std;
+	std.SetData();
+	*/
+
+	/*
+	TO CALL ALL ENTRIES ------------------------>
+	string line;
+	int Index=0;
+
+	while(getline(in,line,'\n')){
+		Index++;
+		for (int i=0; i<line.length(); i++){
+			if (line[i] == ','){
+				line[i]='\t';
+			}
+		}
+		cout<<Index<<"."<<'\t'<<line<<endl;
+	}
+	*/
+
+	/*
+	TO DELETE AN ENTRY------------------------>
+	string Data,Line,Next;
+	Next='\n';
+	int Index = 0;
+	int DelLine=1;
+	while(getline(in,Line)){
+		Index++;
+		if (Index == DelLine){
+			continue;
+		}
+		else{
+			Data.append(Line);
+			Data.append(Next);
+		}
+	}
+	out.close();
+	in.close();
+	outtemp<<Data;
+	remove("Data.txt");
+	outtemp.close();
+	rename("temp.txt","Data.txt");
+	return 0;
+	*/
+
+	/*
+	TO MODIFY AN ENTRY------------------------>
+	*/
+	string Data,Line,Next;
+	Next='\n';
+	int Index = 0;
+	int ModLine = 2;
+	int Column = 1;
+	string NEW = "UPDATED";
+	while(getline(in,Line)){
+		Index++;
+		if (Index == ModLine){
+			string temp;
+			for (int i = 1; i<=6; i++){
+				if (i != Column){
+					temp=temp.append(Element(ModLine,i,Line));
+					temp.append(",");
+				}
+				else{
+					temp=temp.append(NEW);
+					temp.append(",");
+				}
+			}
+		}
+		else{
+			Data.append(Line);
+			Data.append(Next);
+		}
+	}
+	out.close();
+	in.close();
+	outtemp<<Data;
+	remove("Data.txt");
+	outtemp.close();
+	rename("temp.txt","Data.txt");
+	return 0;
+
+
+	/*
+	Student A,B,C;
+	A.SetData();
+	B.SetData();
+	C.SetData();
+	*/
+
+}
